@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/git/NeoAnitube/app/src/main/assets"/><source path="/git/NeoAnitube/app/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/git/NeoAnitube/app/src/debug/assets"/></dataSet></merger>
