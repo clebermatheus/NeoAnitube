@@ -11,7 +11,6 @@ data class Episodio(
     val title: String,
     val numero: String,
     val imagem: String,
-    val _0: Int,
-    val _1: String,
-    val _2: String
+    val viewnumber: Float,
+    val addtime: Float
 )
