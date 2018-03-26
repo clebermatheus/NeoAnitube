@@ -13,7 +13,7 @@ data class Descricao(
     val total: String,
     val ano: Int,
     val generos: String,
-    val descricao: String
+    val descricao: String,
     val total_arqiovps: String,
     val capa: String,
     val autor: String,
