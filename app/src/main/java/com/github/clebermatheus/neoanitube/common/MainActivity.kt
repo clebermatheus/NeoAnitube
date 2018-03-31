@@ -19,6 +19,7 @@ import android.view.ViewGroup
 
 import android.widget.TextView
 import com.github.clebermatheus.neoanitube.R
+import com.github.clebermatheus.neoanitube.anitube.views.UltimosFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
      * The [ViewPager] that will host the section contents.
      */
     private var mViewPager: ViewPager? = null
+    private var tabLayout: TabLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +53,10 @@ class MainActivity : AppCompatActivity() {
         mViewPager = findViewById<View>(R.id.container) as ViewPager
         mViewPager!!.adapter = mSectionsPagerAdapter
 
-        val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
+        tabLayout = findViewById<View>(R.id.tabs) as TabLayout
 
         mViewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-        tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(mViewPager))
+        tabLayout!!.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(mViewPager))
 
         val fab = findViewById<View>(R.id.fab) as FloatingActionButton
         fab.setOnClickListener { view ->
@@ -127,7 +129,17 @@ class MainActivity : AppCompatActivity() {
         override fun getItem(position: Int): Fragment {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1)
+            when (position) {
+                0 -> {
+                    tabLayout!!.getTabAt(position)!!.text = "Últimos Adicionados"
+                    return UltimosFragment.newInstance(position)
+                }
+                1 -> {
+                    tabLayout!!.getTabAt(position)!!.text = "Lançamentos"
+                    return PlaceholderFragment.newInstance(position + 1)
+                }
+                else -> return PlaceholderFragment.newInstance(position + 1)
+            }
         }
 
         override fun getCount(): Int {
