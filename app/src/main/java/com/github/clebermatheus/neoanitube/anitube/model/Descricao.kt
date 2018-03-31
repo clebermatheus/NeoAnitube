@@ -1,4 +1,4 @@
-package com.github.clebermatheus.neoanitube.animes.model
+package com.github.clebermatheus.neoanitube.anitube.model
 
 /**
  * Objeto Descrição
