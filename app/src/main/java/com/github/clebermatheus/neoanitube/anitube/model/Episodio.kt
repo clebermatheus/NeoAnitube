@@ -7,10 +7,10 @@ package com.github.clebermatheus.neoanitube.anitube.model
  */
 
 data class Episodio(
-        val vid: Int = 0,
-        val title: String = "",
-        val numero: String = "",
-        val imagem: String = "",
-        val viewnumber: Double = 0.0,
-        val addtime: String = ""
+    val vid: Int = 0,
+    val title: String = "",
+    val numero: String = "",
+    val imagem: String = "",
+    val viewnumber: Double = 0.0,
+    val addtime: String = ""
 )
