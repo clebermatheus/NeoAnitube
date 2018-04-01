@@ -1,4 +1,4 @@
-package com.github.clebermatheus.neoanitube.anitube.adapter
+package com.github.clebermatheus.neoanitube.anitube.viewmodels
 
 import android.support.v7.widget.RecyclerView
 import android.util.Log

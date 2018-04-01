@@ -14,8 +14,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.github.clebermatheus.neoanitube.R
-import com.github.clebermatheus.neoanitube.anitube.adapter.UltimosViewAdapter
-import com.github.clebermatheus.neoanitube.anitube.model.Episodio
+import com.github.clebermatheus.neoanitube.anitube.viewmodels.UltimosViewAdapter
 import com.github.clebermatheus.neoanitube.anitube.model.Ultimos
 import com.github.clebermatheus.neoanitube.common.constants.API
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
