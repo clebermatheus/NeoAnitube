@@ -19,6 +19,8 @@ import android.view.ViewGroup
 
 import android.widget.TextView
 import com.github.clebermatheus.neoanitube.R
+import com.github.clebermatheus.neoanitube.anitube.views.AnimesFragment
+import com.github.clebermatheus.neoanitube.anitube.views.LancamentosFragment
 import com.github.clebermatheus.neoanitube.anitube.views.UltimosFragment
 
 class MainActivity : AppCompatActivity() {
@@ -126,25 +128,22 @@ class MainActivity : AppCompatActivity() {
      */
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-        override fun getItem(position: Int): Fragment {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            when (position) {
-                0 -> {
-                    tabLayout!!.getTabAt(position)!!.text = "Últimos Adicionados"
-                    return UltimosFragment.newInstance(position)
-                }
-                1 -> {
-                    tabLayout!!.getTabAt(position)!!.text = "Lançamentos"
-                    return PlaceholderFragment.newInstance(position + 1)
-                }
-                else -> return PlaceholderFragment.newInstance(position + 1)
+        override fun getItem(position: Int): Fragment = when (position) {
+            0 -> {
+                tabLayout!!.getTabAt(position)!!.text = "Lançamentos"
+                LancamentosFragment.newInstance(position)
             }
+            1 -> {
+                tabLayout!!.getTabAt(position)!!.text = "Animes"
+                AnimesFragment.newInstance(position)
+            }
+            2 -> {
+                tabLayout!!.getTabAt(position)!!.text = "Últimos Adicionados"
+                UltimosFragment.newInstance(position)
+            }
+            else -> AnimesFragment.newInstance(position)
         }
 
-        override fun getCount(): Int {
-            // Show 3 total pages.
-            return 3
-        }
+        override fun getCount(): Int = 3
     }
 }
