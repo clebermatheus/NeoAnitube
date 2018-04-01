@@ -8,5 +8,6 @@ package com.github.clebermatheus.neoanitube.common.constants
 object API {
     const val URL = "http://anitubebr.biz/api/"
     const val LANCAMENTOS = this.URL+"lancamentos.php"
+    const val SUBCATEGORIA = this.URL+"subcategorias/"
     const val ULTIMOS = this.URL+"ultimos.php"
 }
