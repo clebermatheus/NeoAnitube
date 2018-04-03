@@ -1,14 +1,16 @@
 package com.github.clebermatheus.neoanitube.anitube.viewmodels
 
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.facebook.drawee.view.SimpleDraweeView
 import com.github.clebermatheus.neoanitube.R
+import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Anime
-import com.github.clebermatheus.neoanitube.anitube.model.Episodio
 
 /**
  * Adapter do Recycler View da LancamentosFragment
@@ -19,6 +21,7 @@ class AnimesViewAdapter(private val animes: ArrayList<Anime>) :
         RecyclerView.Adapter<AnimesViewAdapter.ViewHolder>() {
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        val capa: SimpleDraweeView = v.findViewById(R.id.capaAnime)
         val text: TextView = v.findViewById(R.id.titulo)
 
         init {
@@ -30,7 +33,7 @@ class AnimesViewAdapter(private val animes: ArrayList<Anime>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val adapterView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.adapter_lancamentos, parent, false) as View
+                .inflate(R.layout.adapter_animes, parent, false) as View
         return ViewHolder(adapterView)
     }
 
@@ -38,6 +41,7 @@ class AnimesViewAdapter(private val animes: ArrayList<Anime>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.text.text = animes[position].name
+        holder.capa.setImageURI(API.CAPA+animes[position].capa)
     }
 
     fun add(anime: Anime){

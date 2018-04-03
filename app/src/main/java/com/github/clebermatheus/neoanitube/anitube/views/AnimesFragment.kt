@@ -15,9 +15,8 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.model.Subcategoria
-import com.github.clebermatheus.neoanitube.anitube.model.Ultimos
 import com.github.clebermatheus.neoanitube.anitube.viewmodels.AnimesViewAdapter
-import com.github.clebermatheus.neoanitube.common.constants.API
+import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
 import com.google.gson.Gson
 import org.json.JSONObject
@@ -33,10 +32,10 @@ class AnimesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_lancamentos, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_animes, container, false)
         animesAdapter = AnimesViewAdapter(ArrayList())
-        this.requestQueueLancamentos(rootView.context)
-        rootView.findViewById<RecyclerView>(R.id.lancView).apply {
+        this.requestQueueAnimes(rootView.context)
+        rootView.findViewById<RecyclerView>(R.id.animeView).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(rootView.context)
             adapter = animesAdapter
@@ -44,7 +43,7 @@ class AnimesFragment : Fragment() {
         return rootView
     }
 
-    private fun requestQueueLancamentos(context: Context) {
+    private fun requestQueueAnimes(context: Context) {
         if (requestQueue == null) requestQueue = Volley.newRequestQueue(context)
 
         val jsonRequest = JsonObjectRequest(API.SUBCATEGORIA+"anime", null, {
