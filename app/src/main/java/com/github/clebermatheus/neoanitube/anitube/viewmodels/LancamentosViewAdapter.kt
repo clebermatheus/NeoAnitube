@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.facebook.drawee.view.SimpleDraweeView
 import com.github.clebermatheus.neoanitube.R
+import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Episodio
 
 /**
@@ -18,6 +20,7 @@ class LancamentosViewAdapter(private val episodios: ArrayList<Episodio>) :
         RecyclerView.Adapter<LancamentosViewAdapter.ViewHolder>() {
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        val capa: SimpleDraweeView = v.findViewById(R.id.capa)
         val text: TextView = v.findViewById(R.id.titulo)
 
         init {
@@ -29,7 +32,7 @@ class LancamentosViewAdapter(private val episodios: ArrayList<Episodio>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val adapterView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.adapter_lancamentos, parent, false) as View
+                .inflate(R.layout.adapter_episodios, parent, false) as View
         return ViewHolder(adapterView)
     }
 
@@ -37,6 +40,7 @@ class LancamentosViewAdapter(private val episodios: ArrayList<Episodio>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.text.text = episodios[position].title
+        holder.capa.setImageURI(API.CAPA_EPISODIOS+episodios[position].imagem+"/1.jpg")
     }
 
     fun add(episodio: Episodio){

@@ -16,7 +16,7 @@ import com.android.volley.toolbox.Volley
 import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.model.Ultimos
 import com.github.clebermatheus.neoanitube.anitube.viewmodels.LancamentosViewAdapter
-import com.github.clebermatheus.neoanitube.common.constants.API
+import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
 import com.google.gson.Gson
 import org.json.JSONObject
