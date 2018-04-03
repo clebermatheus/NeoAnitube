@@ -1,6 +1,5 @@
 package com.github.clebermatheus.neoanitube.anitube.viewmodels
 
-import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater

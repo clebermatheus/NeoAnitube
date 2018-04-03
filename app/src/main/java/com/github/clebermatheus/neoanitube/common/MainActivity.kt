@@ -1,8 +1,6 @@
 package com.github.clebermatheus.neoanitube.common
 
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -57,13 +55,6 @@ class MainActivity : AppCompatActivity() {
 
         mViewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         tabLayout!!.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(mViewPager))
-
-        val fab = findViewById<View>(R.id.fab) as FloatingActionButton
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
     }
 
 
@@ -93,18 +84,9 @@ class MainActivity : AppCompatActivity() {
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment = when (position) {
-            0 -> {
-                tabLayout!!.getTabAt(position)!!.text = "Lançamentos"
-                LancamentosFragment.newInstance(position)
-            }
-            1 -> {
-                tabLayout!!.getTabAt(position)!!.text = "Animes"
-                AnimesFragment.newInstance(position)
-            }
-            2 -> {
-                tabLayout!!.getTabAt(position)!!.text = "Últimos Adicionados"
-                UltimosFragment.newInstance(position)
-            }
+            0 -> LancamentosFragment.newInstance(position)
+            1 -> AnimesFragment.newInstance(position)
+            2 -> UltimosFragment.newInstance(position)
             else -> AnimesFragment.newInstance(position)
         }
 
