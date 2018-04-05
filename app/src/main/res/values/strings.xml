@@ -8,4 +8,7 @@
     <string name="anime_adapter_capa_descricao">capa</string>
     <string name="anime_adapter_titulo">Dragon Ball Super</string>
     <string name="anime_adapter_descricao">Depois de derrotar Majin Buu, a vida está pacífica, mais uma vez. Pedido por Chi-chi para ganhar dinheiro, Goku trabalha tanto quanto quer treinar ainda mais. Enquanto isso, Goten, prestes a se tornar um cunhado de Videl, sai em uma jornada com Trunks para encontrar um presente para ela.</string>
+    <string name="episodio_nome">Dragon Ball Super 01</string>
+    <string name="episodio_assistir_sd">Assistir em SD</string>
+    <string name="episodio_assistir_hd">Assistir em HD</string>
 </resources>
