@@ -2,9 +2,8 @@
     <string name="app_name">NeoAnitube</string>
     <string name="tab_text_1">Lançamentos</string>
     <string name="tab_text_2">Animes</string>
-    <string name="tab_text_3">Últimos Adcionados</string>
+    <string name="tab_text_3">Últimos Adicionados</string>
     <string name="action_settings">Configurações</string>
-    <string name="section_format">Hello World from section: %1$d</string>
     <string name="anime_adapter_capa_descricao">capa</string>
     <string name="anime_adapter_titulo">Dragon Ball Super</string>
     <string name="anime_adapter_descricao">Depois de derrotar Majin Buu, a vida está pacífica, mais uma vez. Pedido por Chi-chi para ganhar dinheiro, Goku trabalha tanto quanto quer treinar ainda mais. Enquanto isso, Goten, prestes a se tornar um cunhado de Videl, sai em uma jornada com Trunks para encontrar um presente para ela.</string>
