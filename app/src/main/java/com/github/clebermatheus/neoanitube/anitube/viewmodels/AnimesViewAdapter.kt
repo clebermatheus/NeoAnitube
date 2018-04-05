@@ -24,9 +24,9 @@ class AnimesViewAdapter(private val animes: ArrayList<Anime>) :
         val text: TextView = v.findViewById(R.id.titulo)
 
         init {
-            v.setOnClickListener({
+            v.setOnClickListener {
                 Log.d(TAG_DEBUG, "Element $adapterPosition clicked.")
-            })
+            }
         }
     }
 
@@ -54,6 +54,6 @@ class AnimesViewAdapter(private val animes: ArrayList<Anime>) :
     }
 
     companion object {
-        private val TAG_DEBUG = "LancamentosViewAdapter"
+        private val TAG_DEBUG = "EpisodiosViewAdapter"
     }
 }

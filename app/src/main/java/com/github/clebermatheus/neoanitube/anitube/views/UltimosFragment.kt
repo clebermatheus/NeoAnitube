@@ -14,9 +14,9 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.github.clebermatheus.neoanitube.R
-import com.github.clebermatheus.neoanitube.anitube.viewmodels.UltimosViewAdapter
 import com.github.clebermatheus.neoanitube.anitube.model.Ultimos
 import com.github.clebermatheus.neoanitube.anitube.constants.API
+import com.github.clebermatheus.neoanitube.anitube.viewmodels.EpisodiosViewAdapter
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
 import com.google.gson.Gson
 import org.json.JSONObject
@@ -28,12 +28,12 @@ import org.json.JSONObject
  */
 class UltimosFragment : Fragment() {
     private var requestQueue: RequestQueue? = null
-    private lateinit var ultimosAdapter: UltimosViewAdapter
+    private lateinit var ultimosAdapter: EpisodiosViewAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_ultimos, container, false)
-        ultimosAdapter = UltimosViewAdapter(ArrayList())
+        ultimosAdapter = EpisodiosViewAdapter(ArrayList())
         this.requestQueueUltimos(rootView.context)
         rootView.findViewById<RecyclerView>(R.id.ultimoView).apply {
             setHasFixedSize(true)

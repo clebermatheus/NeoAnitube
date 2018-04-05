@@ -15,7 +15,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.model.Ultimos
-import com.github.clebermatheus.neoanitube.anitube.viewmodels.LancamentosViewAdapter
+import com.github.clebermatheus.neoanitube.anitube.viewmodels.EpisodiosViewAdapter
 import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
 import com.google.gson.Gson
@@ -28,17 +28,17 @@ import org.json.JSONObject
  */
 class LancamentosFragment : Fragment() {
     private var requestQueue: RequestQueue? = null
-    private lateinit var lancamentosAdapter: LancamentosViewAdapter
+    private lateinit var episodiosAdapter: EpisodiosViewAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_lancamentos, container, false)
-        lancamentosAdapter = LancamentosViewAdapter(ArrayList())
+        episodiosAdapter = EpisodiosViewAdapter(ArrayList())
         this.requestQueueLancamentos(rootView.context)
         rootView.findViewById<RecyclerView>(R.id.lancView).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(rootView.context)
-            adapter = lancamentosAdapter
+            adapter = episodiosAdapter
         }
         return rootView
     }
@@ -50,7 +50,7 @@ class LancamentosFragment : Fragment() {
             val gson = Gson()
             val resultado: Ultimos = gson.fromJson(it.toString(), Ultimos::class.java)
             Log.d(TAG, resultado.toString())
-            resultado.LANCAMENTOS.forEach { lancamentosAdapter.add(it) }
+            resultado.LANCAMENTOS.forEach { episodiosAdapter.add(it) }
         }, { it.stackTrace })
         jsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
         requestQueue!!.add<JSONObject>(jsonRequest)
