@@ -10,6 +10,8 @@ object API {
     private const val URL_CDN = "https://cdn.anitube.info/"
     const val URL_EPISODIO = "http://fr40.anitube.info/"
     const val LANCAMENTOS = URL +"lancamentos.php"
+    const val DESCRICAO = URL +"descricao/"
+    const val EPISODIOS = URL +"episodios/"
     const val SUBCATEGORIA = URL +"subcategorias/"
     const val ULTIMOS = URL +"ultimos.php"
 
