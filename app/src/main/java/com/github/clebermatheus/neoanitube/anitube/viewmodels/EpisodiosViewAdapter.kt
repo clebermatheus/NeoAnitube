@@ -1,6 +1,8 @@
 package com.github.clebermatheus.neoanitube.anitube.viewmodels
 
+import android.app.Activity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,7 +37,7 @@ class EpisodiosViewAdapter(private val episodios: ArrayList<Episodio>) :
                 val args = Bundle()
                 args.putString("episodio", Gson().toJson(episodio))
                 dialogFragment.arguments = args
-                val main = v.context as MainActivity
+                val main = v.context as AppCompatActivity
                 dialogFragment.show(main.supportFragmentManager, dialogFragment.tag)
             }
         }

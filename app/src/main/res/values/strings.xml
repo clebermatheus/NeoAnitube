@@ -10,4 +10,6 @@
     <string name="episodio_nome">Dragon Ball Super 01</string>
     <string name="episodio_assistir_sd">Assistir em SD</string>
     <string name="episodio_assistir_hd">Assistir em HD</string>
+    <string name="bottom_menu_botao_episodios">Episódios</string>
+    <string name="bottom_menu_generos">Ação</string>
 </resources>
