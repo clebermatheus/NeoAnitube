@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/capa"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:contentDescription="@string/anime_adapter_capa_descricao"/>
+        <TextView
+            android:id="@+id/nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/capa"
+            android:text="@string/episodio_nome"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:paddingBottom="0dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:background="@drawable/gradient_title"/>
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listBotoes"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        tools:listitem="@layout/adapter_episodio"/>
+</android.support.design.widget.CoordinatorLayout>

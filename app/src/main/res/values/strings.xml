@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">NeoAnitube</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="tab_text_1">Lançamentos</string>
+    <string name="tab_text_2">Animes</string>
+    <string name="tab_text_3">Últimos Adicionados</string>
+    <string name="action_settings">Configurações</string>
+    <string name="anime_adapter_capa_descricao">capa</string>
+    <string name="anime_adapter_titulo">Dragon Ball Super</string>
+    <string name="anime_adapter_descricao">Depois de derrotar Majin Buu, a vida está pacífica, mais uma vez. Pedido por Chi-chi para ganhar dinheiro, Goku trabalha tanto quanto quer treinar ainda mais. Enquanto isso, Goten, prestes a se tornar um cunhado de Videl, sai em uma jornada com Trunks para encontrar um presente para ela.</string>
+    <string name="episodio_nome">Dragon Ball Super 01</string>
+    <string name="episodio_assistir_sd">Assistir em SD</string>
+    <string name="episodio_assistir_hd">Assistir em HD</string>
+    <string name="bottom_menu_botao_episodios">Episódios</string>
+    <string name="bottom_menu_generos">Ação</string>
 </resources>

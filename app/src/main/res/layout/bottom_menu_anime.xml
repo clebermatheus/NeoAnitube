@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/capa"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:contentDescription="@string/anime_adapter_capa_descricao"
+            fresco:actualImageScaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/capa"
+            android:background="@drawable/gradient_title"
+            android:padding="16dp"
+            android:paddingBottom="0dp"
+            android:text="@string/episodio_nome"
+            android:textColor="#fff"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/generos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl1"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/bottom_menu_generos"
+        android:textColor="#222"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/descricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/generos"
+        android:padding="8dp"/>
+
+    <Button
+        android:id="@+id/bottom_menu_botao_episodios"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/descricao"
+        android:text="@string/bottom_menu_botao_episodios"/>
+</RelativeLayout>
