@@ -6,10 +6,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Episodio
+import com.mikepenz.google_material_typeface_library.GoogleMaterial.Icon.gmd_hd
+import com.mikepenz.iconics.IconicsDrawable
 
 /**
  *
@@ -30,8 +33,13 @@ class EpisodioAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.text.text = dataset[position]
         when(position) {
-            0 -> holder.tipo = Tipo.SD
-            1 -> holder.tipo = Tipo.HD
+            0 -> {
+                holder.tipo = Tipo.SD
+            }
+            1 -> {
+                holder.tipo = Tipo.HD
+                holder.image.setImageDrawable(IconicsDrawable(holder.v.context, gmd_hd))
+            }
             else -> holder.tipo = Tipo.SD
         }
     }
@@ -53,11 +61,12 @@ class EpisodioAdapter(
         val v: View
     ): RecyclerView.ViewHolder(v) {
         val text = v.findViewById<TextView>(R.id.txtItem)
+        val image = v.findViewById<ImageView>(R.id.icon)
         var tipo = Tipo.SD
 
         init {
             v.setOnClickListener { v.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse
-            (API.URL_EPISODIO+tipo.label+"/"+episodio.vid+".mp4/playlist.m3u8"))) }
+            (API.URL_EPISODIO+ this.tipo.label+"/"+episodio.vid+".mp4/playlist.m3u8"))) }
         }
     }
 

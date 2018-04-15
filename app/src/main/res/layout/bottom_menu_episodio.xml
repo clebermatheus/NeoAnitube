@@ -17,7 +17,7 @@
             android:id="@+id/nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/capa"
+            android:layout_alignTop="@+id/capa"
             android:text="@string/episodio_nome"
             android:textSize="18sp"
             android:padding="16dp"
