@@ -51,6 +51,11 @@ class EpisodioAdapter(
         notifyDataSetChanged()
     }
 
+    fun clear() {
+        dataset.clear()
+        notifyDataSetChanged()
+    }
+
     fun remove(position: Int) {
         dataset.removeAt(position)
         notifyDataSetChanged()
