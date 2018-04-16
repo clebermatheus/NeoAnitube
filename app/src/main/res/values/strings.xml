@@ -11,5 +11,7 @@
     <string name="episodio_assistir_sd">Assistir em SD</string>
     <string name="episodio_assistir_hd">Assistir em HD</string>
     <string name="bottom_menu_botao_episodios">Episódios</string>
-    <string name="bottom_menu_generos">Ação</string>
+    <string name="bottom_menu_generos"> </string>
+    <string name="anime_not_found">Nenhum anime encontrado!</string>
+    <string name="episodio_not_found">Nenhum episódio encontrado!</string>
 </resources>

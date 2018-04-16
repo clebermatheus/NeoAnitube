@@ -1,59 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:id="@+id/rl1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="240dp">
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/capa"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:contentDescription="@string/anime_adapter_capa_descricao"
-            fresco:actualImageScaleType="centerCrop"/>
-
-        <TextView
-            android:id="@+id/nome"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/ctl1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/capa"
-            android:background="@drawable/gradient_title"
-            android:padding="16dp"
-            android:paddingBottom="0dp"
-            android:text="@string/episodio_nome"
-            android:textColor="#fff"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
-    </RelativeLayout>
+            android:fitsSystemWindows="true"
+            fresco:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/capa"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:contentDescription="@string/anime_adapter_capa_descricao"
+                android:fitsSystemWindows="true"
+                fresco:overlayImage="@drawable/gradient_title_reversed"
+                fresco:layout_collapseMode="parallax"
+                fresco:actualImageScaleType="centerCrop"/>
 
-    <TextView
-        android:id="@+id/generos"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:foreground="@drawable/gradient_title"
+                fresco:titleTextColor="@android:color/white"
+                fresco:subtitleTextColor="@android:color/white"
+                fresco:layout_collapseMode="pin"
+                fresco:popupTheme="@style/ThemeOverlay.AppCompat.Dark"/>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        fresco:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/generos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/bottom_menu_generos"
+                android:textColor="#222"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/descricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/generos"
+                android:padding="8dp"/>
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rl1"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:text="@string/bottom_menu_generos"
-        android:textColor="#222"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/descricao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/generos"
-        android:padding="8dp"/>
-
-    <Button
-        android:id="@+id/bottom_menu_botao_episodios"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/descricao"
-        android:text="@string/bottom_menu_botao_episodios"/>
-</RelativeLayout>
+        android:layout_margin="@dimen/fab_margin"
+        fresco:layout_anchor="@id/app_bar"
+        fresco:layout_anchorGravity="bottom|end"
+        fresco:srcCompat="@drawable/ic_menu_white_48dp" />
+</android.support.design.widget.CoordinatorLayout>

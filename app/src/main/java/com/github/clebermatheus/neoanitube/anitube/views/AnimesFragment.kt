@@ -3,12 +3,16 @@ package com.github.clebermatheus.neoanitube.anitube.views
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.TextView
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
@@ -29,17 +33,25 @@ import org.json.JSONObject
 class AnimesFragment : Fragment() {
     private var requestQueue: RequestQueue? = null
     private lateinit var animesAdapter: AnimesViewAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var txtError: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_animes, container, false)
         animesAdapter = AnimesViewAdapter(ArrayList())
+        txtError = rootView.findViewById(R.id.txt_anime_not_found) as TextView
+        swipeRefresh = rootView.findViewById(R.id.swipeRefresh) as SwipeRefreshLayout
         this.requestQueueAnimes(rootView.context)
-        rootView.findViewById<RecyclerView>(R.id.animeView).apply {
+        recyclerView = rootView.findViewById<RecyclerView>(R.id.animeView).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(rootView.context)
             adapter = animesAdapter
         }
+        verifyAdapterIsEmpty()
+        swipeRefresh.setOnRefreshListener { requestQueueAnimes(rootView.context) }
+        swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_dark)
         return rootView
     }
 
@@ -50,10 +62,23 @@ class AnimesFragment : Fragment() {
             val gson = Gson()
             val resultado: Subcategoria = gson.fromJson(it.toString(), Subcategoria::class.java)
             Log.d(TAG, resultado.toString())
-            resultado.SUBCATEGORIAS.forEach { animesAdapter.add(it) }
+            animesAdapter.clear()
+            animesAdapter.addAll(resultado.SUBCATEGORIAS)
+            verifyAdapterIsEmpty()
+            swipeRefresh.isRefreshing = false
         }, { it.stackTrace })
         jsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
         requestQueue!!.add<JSONObject>(jsonRequest)
+    }
+
+    private fun verifyAdapterIsEmpty() {
+        if(animesAdapter.itemCount == 0) {
+            txtError.visibility = VISIBLE
+            recyclerView.visibility = GONE
+        } else {
+            txtError.visibility = GONE
+            recyclerView.visibility = VISIBLE
+        }
     }
 
     companion object {

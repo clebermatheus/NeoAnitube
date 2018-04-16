@@ -3,14 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <android.support.v7.widget.RecyclerView
+        android:scrollbars="vertical"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:id="@+id/animeView"/>
+        android:id="@+id/rvEpisodios"/>
     <TextView
-        android:id="@+id/txt_anime_not_found"
+        android:id="@+id/txt_episodio_not_found"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/anime_not_found"/>
+        android:text="@string/episodio_not_found"/>
 </android.support.v4.widget.SwipeRefreshLayout>

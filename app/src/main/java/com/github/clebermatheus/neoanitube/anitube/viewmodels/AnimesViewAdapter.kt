@@ -60,8 +60,13 @@ class AnimesViewAdapter(private val animes: ArrayList<Anime>) :
         notifyDataSetChanged()
     }
 
-    fun remove(anime: Anime) {
-        animes.remove(anime)
+    fun addAll(animes: ArrayList<Anime>) {
+        animes.forEach { this.animes.add(it) }
+        notifyDataSetChanged()
+    }
+
+    fun clear() {
+        animes.clear()
         notifyDataSetChanged()
     }
 

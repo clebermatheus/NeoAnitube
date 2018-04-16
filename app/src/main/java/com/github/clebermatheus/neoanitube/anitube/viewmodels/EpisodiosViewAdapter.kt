@@ -62,6 +62,16 @@ class EpisodiosViewAdapter(private val episodios: ArrayList<Episodio>) :
         notifyDataSetChanged()
     }
 
+    fun addAll(episodios: ArrayList<Episodio>) {
+        episodios.forEach { this.episodios.add(it) }
+        notifyDataSetChanged()
+    }
+
+    fun clear() {
+        episodios.clear()
+        notifyDataSetChanged()
+    }
+
     fun remove(episodio: Episodio) {
         episodios.remove(episodio)
         notifyDataSetChanged()
