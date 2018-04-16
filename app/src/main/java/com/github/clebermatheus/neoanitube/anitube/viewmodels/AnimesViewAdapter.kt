@@ -1,6 +1,7 @@
 package com.github.clebermatheus.neoanitube.anitube.viewmodels
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +13,6 @@ import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Anime
 import com.github.clebermatheus.neoanitube.anitube.views.BottomMenuAnimeFragment
-import com.github.clebermatheus.neoanitube.common.MainActivity
 import com.google.gson.Gson
 
 /**
@@ -20,10 +20,15 @@ import com.google.gson.Gson
  *
  * Created by clebermatheus on 27/03/18.
  */
-class AnimesViewAdapter(private val animes: ArrayList<Anime>) :
-        RecyclerView.Adapter<AnimesViewAdapter.ViewHolder>() {
+class AnimesViewAdapter(
+    private val animes: ArrayList<Anime>,
+    private val activity: AppCompatActivity
+) : RecyclerView.Adapter<AnimesViewAdapter.ViewHolder>() {
 
-    class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+    class ViewHolder(
+        v: View,
+        activity: AppCompatActivity
+    ) : RecyclerView.ViewHolder(v) {
         val capa: SimpleDraweeView = v.findViewById(R.id.capaAnime)
         val text: TextView = v.findViewById(R.id.titulo)
         lateinit var anime: Anime
@@ -35,8 +40,7 @@ class AnimesViewAdapter(private val animes: ArrayList<Anime>) :
                 val args = Bundle()
                 args.putString("anime", Gson().toJson(anime))
                 dialogFragment.arguments = args
-                val main = v.context as MainActivity
-                dialogFragment.show(main.supportFragmentManager, dialogFragment.tag)
+                dialogFragment.show(activity.supportFragmentManager, dialogFragment.tag)
             }
         }
     }
@@ -44,7 +48,7 @@ class AnimesViewAdapter(private val animes: ArrayList<Anime>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val adapterView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.adapter_animes, parent, false) as View
-        return ViewHolder(adapterView)
+        return ViewHolder(adapterView, activity)
     }
 
     override fun getItemCount(): Int = animes.size
@@ -55,22 +59,29 @@ class AnimesViewAdapter(private val animes: ArrayList<Anime>) :
         holder.anime = animes[position]
     }
 
-    fun add(anime: Anime){
+    fun add(anime: Anime): AnimesViewAdapter {
         animes.add(anime)
         notifyDataSetChanged()
+
+        return this
     }
 
-    fun addAll(animes: ArrayList<Anime>) {
+    fun addAll(animes: List<Anime>): AnimesViewAdapter {
         animes.forEach { this.animes.add(it) }
+        Log.i(TAG_DEBUG, animes.toString())
         notifyDataSetChanged()
+
+        return this
     }
 
-    fun clear() {
+    fun clear(): AnimesViewAdapter {
         animes.clear()
         notifyDataSetChanged()
+
+        return this
     }
 
     companion object {
-        private val TAG_DEBUG = "EpisodiosViewAdapter"
+        private const val TAG_DEBUG = "AnimesViewAdapter"
     }
 }
