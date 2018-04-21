@@ -18,10 +18,13 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.github.clebermatheus.neoanitube.R
+import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Subcategoria
 import com.github.clebermatheus.neoanitube.anitube.viewmodels.AnimesViewAdapter
-import com.github.clebermatheus.neoanitube.anitube.constants.API
+import com.github.clebermatheus.neoanitube.common.MainActivity
+import com.github.clebermatheus.neoanitube.common.Preferences
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
+import com.github.clebermatheus.neoanitube.common.constants.Utils.PREF_ANIMES
 import com.google.gson.Gson
 import org.json.JSONObject
 
@@ -36,11 +39,14 @@ class AnimesFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var txtError: TextView
+    private lateinit var preferences: Preferences
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_animes, container, false)
-        animesAdapter = AnimesViewAdapter(ArrayList())
+        preferences = Preferences(rootView.context)
+        val subcategoria = preferences.getSubcategoria(PREF_ANIMES)
+        animesAdapter = AnimesViewAdapter(subcategoria.SUBCATEGORIAS, rootView.context as MainActivity)
         txtError = rootView.findViewById(R.id.txt_anime_not_found) as TextView
         swipeRefresh = rootView.findViewById(R.id.swipeRefresh) as SwipeRefreshLayout
         this.requestQueueAnimes(rootView.context)
@@ -62,8 +68,8 @@ class AnimesFragment : Fragment() {
             val gson = Gson()
             val resultado: Subcategoria = gson.fromJson(it.toString(), Subcategoria::class.java)
             Log.d(TAG, resultado.toString())
-            animesAdapter.clear()
-            animesAdapter.addAll(resultado.SUBCATEGORIAS)
+            preferences.putSubcategoria(PREF_ANIMES, resultado)
+            animesAdapter.clear().addAll(resultado.SUBCATEGORIAS)
             verifyAdapterIsEmpty()
             swipeRefresh.isRefreshing = false
         }, { it.stackTrace })
@@ -82,8 +88,8 @@ class AnimesFragment : Fragment() {
     }
 
     companion object {
-        private val ARG_SECTION_NUMBER = "section_number"
-        private val TAG = "AnimesFragment"
+        private const val ARG_SECTION_NUMBER = "section_number"
+        private const val TAG = "AnimesFragment"
 
         fun newInstance(sectionNumber: Int): AnimesFragment {
             val fragment = AnimesFragment()

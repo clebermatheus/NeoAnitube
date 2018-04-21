@@ -3,13 +3,6 @@
 ### Android ###
 # Built application files
 *.apk
-*.ap_
-
-# Files for the ART/Dalvik VM
-*.dex
-
-# Java class files
-*.class
 
 # Generated files
 bin/
@@ -41,7 +34,7 @@ captures/
 .idea/tasks.xml
 .idea/gradle.xml
 .idea/dictionaries
-.idea/libraries
+.idea/libraries/
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
@@ -66,7 +59,6 @@ gen-external-apklibs
 # Generated files
 
 # Gradle files
-.gradle
 
 # Signing files
 .signing/
@@ -78,7 +70,6 @@ gen-external-apklibs
 # Log Files
 
 # Android Studio
-/*/build/
 /*/local.properties
 /*/out
 /*/*/build
@@ -92,14 +83,12 @@ gen-external-apklibs
 # External native build folder generated in Android Studio 2.2 and later
 
 # NDK
-obj/
 
 # IntelliJ IDEA
 *.iws
 /out/
 
 # User-specific configurations
-.idea/libraries/
 .idea/.name
 .idea/compiler.xml
 .idea/copyright/profiles_settings.xml
@@ -193,4 +182,3 @@ fabric.properties
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 
 
-# End of https://www.gitignore.io/api/java,kotlin,android,androidstudio

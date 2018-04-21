@@ -14,4 +14,6 @@
     <string name="bottom_menu_generos"> </string>
     <string name="anime_not_found">Nenhum anime encontrado!</string>
     <string name="episodio_not_found">Nenhum episódio encontrado!</string>
+    <string name="search_hint">Pesquisar animes</string>
+    <string name="action_search">Pesquisar animes</string>
 </resources>
