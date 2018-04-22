@@ -1,6 +1,7 @@
 package com.github.clebermatheus.neoanitube.anitube.views
 
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -30,12 +31,15 @@ import java.lang.reflect.Type
 class EpisodiosActivity: AppCompatActivity() {
     private var requestQueue: RequestQueue? = null
     private lateinit var episodiosViewAdapter: EpisodiosViewAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var swipeRefresh: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_episodios)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.rvEpisodios)
+        recyclerView = findViewById(R.id.rvEpisodios)
+        swipeRefresh = findViewById(R.id.swipeRefresh)
         episodiosViewAdapter = EpisodiosViewAdapter(ArrayList())
         val anime: Anime = Gson().fromJson(intent.getStringExtra("anime"), Anime::class.java)
         val actionBar = supportActionBar
@@ -52,6 +56,8 @@ class EpisodiosActivity: AppCompatActivity() {
             this.layoutManager = LinearLayoutManager(context)
             adapter = episodiosViewAdapter
         }
+        swipeRefresh.setOnRefreshListener { requestQueueEpisodios(anime) }
+        swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_dark)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -72,7 +78,8 @@ class EpisodiosActivity: AppCompatActivity() {
             val type: Type = object : TypeToken<ArrayList<Episodio>>() {}.type
             val resultado: ArrayList<Episodio> = gson.fromJson(it.getString("EPISODIOS"), type)
             Log.d(TAG, resultado.toString())
-            resultado.forEach { episodiosViewAdapter.add(it) }
+            episodiosViewAdapter.clear().addAll(resultado)
+            swipeRefresh.isRefreshing = false
         }, { it.stackTrace })
         jsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
         requestQueue!!.add<JSONObject>(jsonRequest)
