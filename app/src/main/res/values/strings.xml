@@ -16,4 +16,9 @@
     <string name="episodio_not_found">Nenhum episódio encontrado!</string>
     <string name="search_hint">Pesquisar animes</string>
     <string name="action_search">Pesquisar animes</string>
+    <string name="anime_autor">Escrito por:</string>
+    <string name="anime_estudio">Publicado por:</string>
+    <string name="anime_ano_lancamento">Ano de lançamento:</string>
+    <string name="anime_status">Status:</string>
+    <string name="anime_direcao">Dirigido por:</string>
 </resources>

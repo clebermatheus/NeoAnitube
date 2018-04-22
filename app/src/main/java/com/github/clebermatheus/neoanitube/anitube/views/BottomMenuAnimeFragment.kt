@@ -3,9 +3,9 @@ package com.github.clebermatheus.neoanitube.anitube.views
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.*
-import android.support.v7.widget.Toolbar
 import android.text.Html
 import android.util.Log
 import android.view.View
@@ -31,12 +31,14 @@ import org.json.JSONObject
  */
 class BottomMenuAnimeFragment: BottomSheetDialogFragment() {
     private var requestQueue: RequestQueue? = null
-    lateinit var anime: Anime
+    private lateinit var anime: Anime
+    private lateinit var gson: Gson
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        gson = Gson()
         if(arguments != null){
-            anime = Gson().fromJson(arguments!!.getString("anime"), Anime::class.java)
+            anime = gson.fromJson(arguments!!.getString("anime"), Anime::class.java)
         }
     }
 
@@ -45,10 +47,11 @@ class BottomMenuAnimeFragment: BottomSheetDialogFragment() {
         super.setupDialog(dialog, style)
         val v = View.inflate(context, R.layout.bottom_menu_anime, null) as View
         val capa = v.findViewById<SimpleDraweeView>(R.id.capa)
-        capa.setImageURI(API.CAPA+anime.capa)
         val collapseToolbar = v.findViewById<CollapsingToolbarLayout>(R.id.ctl1)
-        collapseToolbar.title = anime.name
         val fab = v.findViewById<FloatingActionButton>(R.id.fab)
+
+        capa.setImageURI(API.CAPA+anime.capa)
+        collapseToolbar.title = anime.name
         fab.setOnClickListener {
             val intent = Intent(v.context, EpisodiosActivity::class.java)
             intent.putExtra("anime", Gson().toJson(anime))
@@ -68,15 +71,27 @@ class BottomMenuAnimeFragment: BottomSheetDialogFragment() {
         if (requestQueue == null) requestQueue = Volley.newRequestQueue(context)
 
         val jsonRequest = JsonObjectRequest(API.DESCRICAO+anime.chid, null, {
-            val gson = Gson()
             val resultado: Subcategoria = gson.fromJson(it.toString(), Subcategoria::class.java)
             Log.d(TAG, resultado.toString())
 
             val descricao = v.findViewById<TextView>(R.id.descricao)
             val generos = v.findViewById<TextView>(R.id.generos)
+            val autor = v.findViewById<TextView>(R.id.autor)
+            val estudio = v.findViewById<TextView>(R.id.estudio)
+            val anoLancamento = v.findViewById<TextView>(R.id.ano_lancamento)
+            val status = v.findViewById<TextView>(R.id.status)
+            val direcao = v.findViewById<TextView>(R.id.direcao)
+
             resultado.SUBCATEGORIAS_DESCRICAO.forEach {
-                descricao.text = Html.fromHtml(it.descricao)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    descricao.text = Html.fromHtml(it.descricao, Html.FROM_HTML_MODE_LEGACY)
+                } else { descricao.text = Html.fromHtml(it.descricao) }
                 generos.text = it.generos
+                autor.text = it.autor
+                estudio.text = it.estudio
+                anoLancamento.text = String.format("%d", it.ano)
+                status.text = "${it.total} - ${it.status_anime}"
+                direcao.text = it.direcao
             }
         }, { it.stackTrace })
         jsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
@@ -84,10 +99,9 @@ class BottomMenuAnimeFragment: BottomSheetDialogFragment() {
     }
 
     inner class BehaviorInternal: BottomSheetBehavior.BottomSheetCallback() {
-        override fun onStateChanged(bottomSheet: View, newState: Int) {
-            when(newState){
-                BottomSheetBehavior.STATE_HIDDEN -> dismiss()
-            }
+        override fun onStateChanged(bottomSheet: View, newState: Int) = when(newState) {
+            BottomSheetBehavior.STATE_HIDDEN -> dismiss()
+            else -> {}
         }
 
         override fun onSlide(bottomSheet: View, slideOffset: Float) {}

@@ -29,7 +29,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="?android:attr/actionBarSize"
                 android:foreground="@drawable/gradient_title"
                 fresco:titleTextColor="@android:color/white"
                 fresco:subtitleTextColor="@android:color/white"
@@ -53,13 +53,58 @@
                 android:textColor="#222"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
-
             <TextView
                 android:id="@+id/descricao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/generos"
                 android:padding="8dp"/>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/descricao"
+                android:padding="8dp">
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:text="@string/anime_autor"
+                        android:textStyle="bold"/>
+                    <TextView android:id="@+id/autor"/>
+                </TableRow>
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:text="@string/anime_estudio"
+                        android:textStyle="bold"/>
+                    <TextView android:id="@+id/estudio"/>
+                </TableRow>
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:text="@string/anime_ano_lancamento"
+                        android:textStyle="bold"/>
+                    <TextView android:id="@+id/ano_lancamento"/>
+                </TableRow>
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:text="@string/anime_status"
+                        android:textStyle="bold"/>
+                    <TextView android:id="@+id/status"/>
+                </TableRow>
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+                    <TextView
+                        android:text="@string/anime_direcao"
+                        android:textStyle="bold"/>
+                    <TextView android:id="@+id/direcao"/>
+                </TableRow>
+            </TableLayout>
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
     <android.support.design.widget.FloatingActionButton

@@ -1,7 +1,7 @@
 package com.github.clebermatheus.neoanitube.anitube.model
 
 /**
- * Objeto Descrição
+ * Objeto de Descrição do Anime
  *
  * Created by clebermatheus on 25/03/18.
  */
