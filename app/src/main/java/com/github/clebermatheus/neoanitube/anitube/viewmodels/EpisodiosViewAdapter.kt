@@ -1,6 +1,5 @@
 package com.github.clebermatheus.neoanitube.anitube.viewmodels
 
-import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
@@ -14,7 +13,6 @@ import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Episodio
 import com.github.clebermatheus.neoanitube.anitube.views.BottomMenuEpisodioFragment
-import com.github.clebermatheus.neoanitube.common.MainActivity
 import com.google.gson.Gson
 
 /**
@@ -57,24 +55,28 @@ class EpisodiosViewAdapter(private val episodios: ArrayList<Episodio>) :
         holder.capa.setImageURI(API.CAPA_EPISODIOS+episodios[position].imagem+"/1.jpg")
     }
 
-    fun add(episodio: Episodio){
+    fun add(episodio: Episodio): EpisodiosViewAdapter {
         episodios.add(episodio)
         notifyDataSetChanged()
+        return this
     }
 
-    fun addAll(episodios: ArrayList<Episodio>) {
+    fun addAll(episodios: ArrayList<Episodio>): EpisodiosViewAdapter {
         episodios.forEach { this.episodios.add(it) }
         notifyDataSetChanged()
+        return this
     }
 
-    fun clear() {
+    fun clear(): EpisodiosViewAdapter {
         episodios.clear()
         notifyDataSetChanged()
+        return this
     }
 
-    fun remove(episodio: Episodio) {
+    fun remove(episodio: Episodio): EpisodiosViewAdapter {
         episodios.remove(episodio)
         notifyDataSetChanged()
+        return this
     }
 
     companion object {
