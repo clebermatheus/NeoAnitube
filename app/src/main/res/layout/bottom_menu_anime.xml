@@ -22,7 +22,6 @@
                 android:layout_height="240dp"
                 android:contentDescription="@string/anime_adapter_capa_descricao"
                 android:fitsSystemWindows="true"
-                fresco:overlayImage="@drawable/gradient_title_reversed"
                 fresco:layout_collapseMode="parallax"
                 fresco:actualImageScaleType="centerCrop"/>
 

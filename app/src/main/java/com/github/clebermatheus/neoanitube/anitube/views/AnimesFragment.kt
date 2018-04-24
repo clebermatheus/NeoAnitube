@@ -4,10 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -40,10 +42,16 @@ class AnimesFragment : Fragment() {
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var txtError: TextView
     private lateinit var preferences: Preferences
+    private lateinit var rootView: View
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_animes, container, false)
+        rootView = inflater.inflate(R.layout.fragment_animes, container, false)
         preferences = Preferences(rootView.context)
         val subcategoria = preferences.getSubcategoria(PREF_ANIMES)
         animesAdapter = AnimesViewAdapter(subcategoria.SUBCATEGORIAS, rootView.context as MainActivity)
@@ -59,6 +67,27 @@ class AnimesFragment : Fragment() {
         swipeRefresh.setOnRefreshListener { requestQueueAnimes(rootView.context) }
         swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_dark)
         return rootView
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+        R.id.action_view -> {
+            val ( animes, _, tipoView) = animesAdapter
+            item.icon = if(tipoView) {
+                this.resources.getDrawable(R.drawable.ic_view_module_white_24dp, null)
+            } else {
+                this.resources.getDrawable(R.drawable.ic_view_list_white_24dp, null)
+            }
+            animesAdapter = AnimesViewAdapter(animes, rootView.context as MainActivity, !tipoView)
+            recyclerView.apply {
+                layoutManager = if(!tipoView) {
+                    GridLayoutManager(rootView.context, 4)
+                } else { LinearLayoutManager(rootView.context) }
+                adapter = animesAdapter
+                setHasFixedSize(true)
+            }
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     private fun requestQueueAnimes(context: Context) {
