@@ -16,20 +16,21 @@ import com.github.clebermatheus.neoanitube.anitube.views.BottomMenuAnimeFragment
 import com.google.gson.Gson
 
 /**
- * Adapter do Recycler View da LancamentosFragment
+ * Adapter para a exibição da lista de animes
  *
  * Created by clebermatheus on 27/03/18.
  */
 class AnimesViewAdapter(
     private val animes: ArrayList<Anime>,
-    private val activity: AppCompatActivity
+    private val activity: AppCompatActivity,
+    private val tipoView: Boolean = false
 ) : RecyclerView.Adapter<AnimesViewAdapter.ViewHolder>() {
 
     class ViewHolder(
         v: View,
         activity: AppCompatActivity
     ) : RecyclerView.ViewHolder(v) {
-        val capa: SimpleDraweeView = v.findViewById(R.id.capaAnime)
+        val capa: SimpleDraweeView = v.findViewById(R.id.capa)
         val text: TextView = v.findViewById(R.id.titulo)
         lateinit var anime: Anime
 
@@ -46,8 +47,12 @@ class AnimesViewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val adapterView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.adapter_animes, parent, false) as View
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val adapterView = if(tipoView) {
+            layoutInflater.inflate(R.layout.adapter_grid, parent, false)
+        } else {
+            layoutInflater.inflate(R.layout.adapter_list, parent, false)
+        }
         return ViewHolder(adapterView, activity)
     }
 
@@ -80,6 +85,10 @@ class AnimesViewAdapter(
 
         return this
     }
+
+    operator fun component1(): ArrayList<Anime> = this.animes
+    operator fun component2(): AppCompatActivity = this.activity
+    operator fun component3(): Boolean = this.tipoView
 
     companion object {
         private const val TAG_DEBUG = "AnimesViewAdapter"

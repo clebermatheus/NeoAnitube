@@ -22,7 +22,7 @@
             android:textSize="18sp"
             android:padding="16dp"
             android:paddingBottom="0dp"
-            android:textColor="#fff"
+            android:textColor="@color/primaryTextColor"
             android:textStyle="bold"
             android:background="@drawable/gradient_title"/>
     </RelativeLayout>

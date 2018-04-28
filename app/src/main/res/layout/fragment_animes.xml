@@ -12,5 +12,6 @@
         android:id="@+id/txt_anime_not_found"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textColor="@color/secondaryTextColor"
         android:text="@string/anime_not_found"/>
 </android.support.v4.widget.SwipeRefreshLayout>

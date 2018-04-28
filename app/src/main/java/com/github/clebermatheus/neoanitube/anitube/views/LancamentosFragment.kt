@@ -4,10 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -36,10 +38,16 @@ class LancamentosFragment : Fragment() {
     private lateinit var rvEpisodios: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var txtError: TextView
+    private lateinit var rootView: View
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_episodios, container, false)
+        rootView = inflater.inflate(R.layout.fragment_episodios, container, false)
         episodiosAdapter = EpisodiosViewAdapter(ArrayList())
         swipeRefresh = rootView.findViewById(R.id.swipeRefresh) as SwipeRefreshLayout
         txtError = rootView.findViewById(R.id.txt_episodio_not_found) as TextView
@@ -51,8 +59,29 @@ class LancamentosFragment : Fragment() {
         }
         verifyAdapterIsEmpty()
         swipeRefresh.setOnRefreshListener { requestQueueLancamentos(rootView.context) }
-        swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_dark)
+        swipeRefresh.setColorSchemeResources(R.color.primaryColor, R.color.secondaryColor)
         return rootView
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+        R.id.action_view -> {
+            val ( episodios, tipoView) = episodiosAdapter
+            item.icon = if(tipoView) {
+                this.resources.getDrawable(R.drawable.ic_view_module_24dp, null)
+            } else {
+                this.resources.getDrawable(R.drawable.ic_view_list_24dp, null)
+            }
+            episodiosAdapter = EpisodiosViewAdapter(episodios, !tipoView)
+            rvEpisodios.apply {
+                layoutManager = if(!tipoView) {
+                    GridLayoutManager(rootView.context, 4)
+                } else { LinearLayoutManager(rootView.context) }
+                adapter = episodiosAdapter
+                setHasFixedSize(true)
+            }
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     private fun requestQueueLancamentos(context: Context) {
@@ -82,8 +111,8 @@ class LancamentosFragment : Fragment() {
     }
 
     companion object {
-        private val ARG_SECTION_NUMBER = "section_number"
-        private val TAG = "LancamentosFragment"
+        private const val ARG_SECTION_NUMBER = "section_number"
+        private const val TAG = "LancamentosFragment"
 
         fun newInstance(sectionNumber: Int): LancamentosFragment {
             val fragment = LancamentosFragment()

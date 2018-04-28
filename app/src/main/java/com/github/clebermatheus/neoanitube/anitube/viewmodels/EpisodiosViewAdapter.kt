@@ -16,12 +16,14 @@ import com.github.clebermatheus.neoanitube.anitube.views.BottomMenuEpisodioFragm
 import com.google.gson.Gson
 
 /**
- * Adapter do Recycler View da LancamentosFragment
+ * Adapter para exibir os Episódios
  *
  * Created by clebermatheus on 27/03/18.
  */
-class EpisodiosViewAdapter(private val episodios: ArrayList<Episodio>) :
-        RecyclerView.Adapter<EpisodiosViewAdapter.ViewHolder>() {
+class EpisodiosViewAdapter(
+        private val episodios: ArrayList<Episodio>,
+        private val tipoView: Boolean = false
+) : RecyclerView.Adapter<EpisodiosViewAdapter.ViewHolder>() {
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val capa: SimpleDraweeView = v.findViewById(R.id.capa)
@@ -42,8 +44,12 @@ class EpisodiosViewAdapter(private val episodios: ArrayList<Episodio>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val adapterView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.adapter_episodios, parent, false) as View
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val adapterView = if(tipoView) {
+            layoutInflater.inflate(R.layout.adapter_grid, parent, false)
+        } else {
+            layoutInflater.inflate(R.layout.adapter_list, parent, false)
+        }
         return ViewHolder(adapterView)
     }
 
@@ -78,6 +84,9 @@ class EpisodiosViewAdapter(private val episodios: ArrayList<Episodio>) :
         notifyDataSetChanged()
         return this
     }
+
+    operator fun component1(): ArrayList<Episodio> = this.episodios
+    operator fun component2(): Boolean = this.tipoView
 
     companion object {
         private val TAG_DEBUG = "EpisodiosViewAdapter"

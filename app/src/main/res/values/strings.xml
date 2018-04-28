@@ -21,4 +21,5 @@
     <string name="anime_ano_lancamento">Ano de lançamento:</string>
     <string name="anime_status">Status:</string>
     <string name="anime_direcao">Dirigido por:</string>
+    <string name="action_view">Alterar visualização</string>
 </resources>

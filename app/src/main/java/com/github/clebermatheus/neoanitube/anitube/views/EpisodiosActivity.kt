@@ -3,9 +3,11 @@ package com.github.clebermatheus.neoanitube.anitube.views
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.RequestQueue
@@ -60,14 +62,34 @@ class EpisodiosActivity: AppCompatActivity() {
         swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_dark)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item!!.itemId) {
-            android.R.id.home -> {
-                finish()
-                return true
-            }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_episodios, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+        android.R.id.home -> {
+            finish()
+            true
         }
-        return super.onOptionsItemSelected(item)
+        R.id.action_view -> {
+            val ( episodios, tipoView) = episodiosViewAdapter
+            item.icon = if(tipoView) {
+                this.resources.getDrawable(R.drawable.ic_view_module_24dp, null)
+            } else {
+                this.resources.getDrawable(R.drawable.ic_view_list_24dp, null)
+            }
+            episodiosViewAdapter = EpisodiosViewAdapter(episodios, !tipoView)
+            recyclerView.apply {
+                layoutManager = if(!tipoView) {
+                    GridLayoutManager(this.context, 4)
+                } else { LinearLayoutManager(rootView.context) }
+                adapter = episodiosViewAdapter
+                setHasFixedSize(true)
+            }
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     private fun requestQueueEpisodios(anime: Anime) {

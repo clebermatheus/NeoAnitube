@@ -35,6 +35,6 @@
             android:gravity="start"
             android:textSize="16sp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@android:color/black" />
+            android:textColor="@color/secondaryTextColor" />
     </LinearLayout>
 </RelativeLayout>
