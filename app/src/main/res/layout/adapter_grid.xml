@@ -25,7 +25,7 @@
             android:layout_centerVertical="true"
             android:padding="2dp"
             android:text="@string/anime_adapter_titulo"
-            android:textColor="#fff"
+            android:textColor="@color/primaryTextColor"
             android:textSize="12sp"
             android:background="@drawable/gradient_title_reversed"/>
     </RelativeLayout>

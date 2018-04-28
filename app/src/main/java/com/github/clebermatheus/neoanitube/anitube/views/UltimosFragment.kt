@@ -59,7 +59,7 @@ class UltimosFragment : Fragment() {
         }
         verifyAdapterIsEmpty()
         swipeRefresh.setOnRefreshListener { requestQueueUltimos(rootView.context) }
-        swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_dark)
+        swipeRefresh.setColorSchemeResources(R.color.primaryColor, R.color.secondaryColor)
         return rootView
     }
 
@@ -67,9 +67,9 @@ class UltimosFragment : Fragment() {
         R.id.action_view -> {
             val ( episodios, tipoView) = ultimosAdapter
             item.icon = if(tipoView) {
-                this.resources.getDrawable(R.drawable.ic_view_module_white_24dp, null)
+                this.resources.getDrawable(R.drawable.ic_view_module_24dp, null)
             } else {
-                this.resources.getDrawable(R.drawable.ic_view_list_white_24dp, null)
+                this.resources.getDrawable(R.drawable.ic_view_list_24dp, null)
             }
             ultimosAdapter = EpisodiosViewAdapter(episodios, !tipoView)
             rvEpisodios.apply {

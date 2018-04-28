@@ -22,6 +22,7 @@
                 android:layout_height="240dp"
                 android:contentDescription="@string/anime_adapter_capa_descricao"
                 android:fitsSystemWindows="true"
+                fresco:overlayImage="@drawable/gradient_title_reversed_2"
                 fresco:layout_collapseMode="parallax"
                 fresco:actualImageScaleType="centerCrop"/>
 
@@ -30,8 +31,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:foreground="@drawable/gradient_title"
-                fresco:titleTextColor="@android:color/white"
-                fresco:subtitleTextColor="@android:color/white"
                 fresco:layout_collapseMode="pin"
                 fresco:popupTheme="@style/ThemeOverlay.AppCompat.Dark"/>
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -113,5 +112,5 @@
         android:layout_margin="@dimen/fab_margin"
         fresco:layout_anchor="@id/app_bar"
         fresco:layout_anchorGravity="bottom|end"
-        fresco:srcCompat="@drawable/ic_menu_white_48dp" />
+        fresco:srcCompat="@drawable/ic_menu" />
 </android.support.design.widget.CoordinatorLayout>

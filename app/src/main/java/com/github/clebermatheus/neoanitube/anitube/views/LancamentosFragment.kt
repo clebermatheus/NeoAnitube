@@ -59,7 +59,7 @@ class LancamentosFragment : Fragment() {
         }
         verifyAdapterIsEmpty()
         swipeRefresh.setOnRefreshListener { requestQueueLancamentos(rootView.context) }
-        swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_dark)
+        swipeRefresh.setColorSchemeResources(R.color.primaryColor, R.color.secondaryColor)
         return rootView
     }
 
@@ -67,9 +67,9 @@ class LancamentosFragment : Fragment() {
         R.id.action_view -> {
             val ( episodios, tipoView) = episodiosAdapter
             item.icon = if(tipoView) {
-                this.resources.getDrawable(R.drawable.ic_view_module_white_24dp, null)
+                this.resources.getDrawable(R.drawable.ic_view_module_24dp, null)
             } else {
-                this.resources.getDrawable(R.drawable.ic_view_list_white_24dp, null)
+                this.resources.getDrawable(R.drawable.ic_view_list_24dp, null)
             }
             episodiosAdapter = EpisodiosViewAdapter(episodios, !tipoView)
             rvEpisodios.apply {
@@ -111,8 +111,8 @@ class LancamentosFragment : Fragment() {
     }
 
     companion object {
-        private val ARG_SECTION_NUMBER = "section_number"
-        private val TAG = "LancamentosFragment"
+        private const val ARG_SECTION_NUMBER = "section_number"
+        private const val TAG = "LancamentosFragment"
 
         fun newInstance(sectionNumber: Int): LancamentosFragment {
             val fragment = LancamentosFragment()

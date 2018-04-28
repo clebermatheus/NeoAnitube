@@ -4,8 +4,10 @@ import android.app.SearchManager
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
 import android.view.MenuItem
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.RequestQueue
@@ -50,9 +52,31 @@ class SearchableActivity: AppCompatActivity() {
         handleIntent(intent)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_episodios, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         android.R.id.home -> {
             finish()
+            true
+        }
+        R.id.action_view -> {
+            val ( animes, _, tipoView) = animesAdapter
+            item.icon = if(tipoView) {
+                this.resources.getDrawable(R.drawable.ic_view_module_24dp, null)
+            } else {
+                this.resources.getDrawable(R.drawable.ic_view_list_24dp, null)
+            }
+            animesAdapter = AnimesViewAdapter(animes, this, !tipoView)
+            recyclerView.apply {
+                layoutManager = if(!tipoView) {
+                    GridLayoutManager(rootView.context, 4)
+                } else { LinearLayoutManager(rootView.context) }
+                adapter = animesAdapter
+                setHasFixedSize(true)
+            }
             true
         }
         else -> super.onOptionsItemSelected(item)

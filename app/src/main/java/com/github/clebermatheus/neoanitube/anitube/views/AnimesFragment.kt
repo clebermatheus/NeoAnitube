@@ -65,7 +65,7 @@ class AnimesFragment : Fragment() {
         }
         verifyAdapterIsEmpty()
         swipeRefresh.setOnRefreshListener { requestQueueAnimes(rootView.context) }
-        swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_dark)
+        swipeRefresh.setColorSchemeResources(R.color.primaryColor, R.color.secondaryColor)
         return rootView
     }
 
@@ -73,9 +73,9 @@ class AnimesFragment : Fragment() {
         R.id.action_view -> {
             val ( animes, _, tipoView) = animesAdapter
             item.icon = if(tipoView) {
-                this.resources.getDrawable(R.drawable.ic_view_module_white_24dp, null)
+                this.resources.getDrawable(R.drawable.ic_view_module_24dp, null)
             } else {
-                this.resources.getDrawable(R.drawable.ic_view_list_white_24dp, null)
+                this.resources.getDrawable(R.drawable.ic_view_list_24dp, null)
             }
             animesAdapter = AnimesViewAdapter(animes, rootView.context as MainActivity, !tipoView)
             recyclerView.apply {
