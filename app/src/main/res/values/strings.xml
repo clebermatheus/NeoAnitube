@@ -22,4 +22,12 @@
     <string name="anime_status">Status:</string>
     <string name="anime_direcao">Dirigido por:</string>
     <string name="action_view">Alterar visualização</string>
+    <string name="action_sobre">Sobre o Aplicativo</string>
+
+    <string name="aboutLibraries_description_special1_name">Doe!</string>
+    <string name="aboutLibraries_description_special1_text">
+        <![CDATA[
+        <a href="https://google.com.br">Hello World!</a>
+        ]]>
+    </string>
 </resources>

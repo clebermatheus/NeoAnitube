@@ -1,4 +1,4 @@
-package com.github.clebermatheus.neoanitube.common
+package com.github.clebermatheus.neoanitube.common.viewmodels
 
 import android.app.Activity
 import android.content.Context

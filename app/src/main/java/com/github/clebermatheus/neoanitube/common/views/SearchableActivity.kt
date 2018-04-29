@@ -1,4 +1,4 @@
-package com.github.clebermatheus.neoanitube.common
+package com.github.clebermatheus.neoanitube.common.views
 
 import android.app.SearchManager
 import android.content.Intent
@@ -17,6 +17,7 @@ import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Subcategoria
 import com.github.clebermatheus.neoanitube.anitube.viewmodels.AnimesViewAdapter
+import com.github.clebermatheus.neoanitube.common.viewmodels.Preferences
 import com.github.clebermatheus.neoanitube.common.constants.Utils
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
 import com.google.gson.Gson

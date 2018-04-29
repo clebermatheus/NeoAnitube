@@ -23,8 +23,8 @@ import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Subcategoria
 import com.github.clebermatheus.neoanitube.anitube.viewmodels.AnimesViewAdapter
-import com.github.clebermatheus.neoanitube.common.MainActivity
-import com.github.clebermatheus.neoanitube.common.Preferences
+import com.github.clebermatheus.neoanitube.common.views.MainActivity
+import com.github.clebermatheus.neoanitube.common.viewmodels.Preferences
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
 import com.github.clebermatheus.neoanitube.common.constants.Utils.PREF_ANIMES
 import com.google.gson.Gson
