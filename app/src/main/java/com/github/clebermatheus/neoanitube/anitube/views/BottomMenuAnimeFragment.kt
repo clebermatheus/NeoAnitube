@@ -11,8 +11,9 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.android.volley.DefaultRetryPolicy
+import com.android.volley.Request.Method.GET
 import com.android.volley.RequestQueue
-import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.facebook.drawee.view.SimpleDraweeView
 import com.github.clebermatheus.neoanitube.R
@@ -20,8 +21,8 @@ import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Anime
 import com.github.clebermatheus.neoanitube.anitube.model.Subcategoria
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
+import com.github.clebermatheus.neoanitube.common.models.GsonRequest
 import com.google.gson.Gson
-import org.json.JSONObject
 
 /**
  *
@@ -70,10 +71,9 @@ class BottomMenuAnimeFragment: BottomSheetDialogFragment() {
     private fun requestQueueDescricao(v: View) {
         if (requestQueue == null) requestQueue = Volley.newRequestQueue(context)
 
-        val jsonRequest = JsonObjectRequest(API.DESCRICAO+anime.chid, null, {
-            val resultado: Subcategoria = gson.fromJson(it.toString(), Subcategoria::class.java)
-            Log.d(TAG, resultado.toString())
-
+        val gsonRequest = GsonRequest<Subcategoria>(GET, API.DESCRICAO+anime.chid, Subcategoria::class.java,
+                null, Response.Listener {
+            Log.d(TAG, it.toString())
             val descricao = v.findViewById<TextView>(R.id.descricao)
             val generos = v.findViewById<TextView>(R.id.generos)
             val autor = v.findViewById<TextView>(R.id.autor)
@@ -82,7 +82,7 @@ class BottomMenuAnimeFragment: BottomSheetDialogFragment() {
             val status = v.findViewById<TextView>(R.id.status)
             val direcao = v.findViewById<TextView>(R.id.direcao)
 
-            resultado.SUBCATEGORIAS_DESCRICAO.forEach {
+            it.SUBCATEGORIAS_DESCRICAO.forEach {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     descricao.text = Html.fromHtml(it.descricao, Html.FROM_HTML_MODE_LEGACY)
                 } else { descricao.text = Html.fromHtml(it.descricao) }
@@ -93,9 +93,9 @@ class BottomMenuAnimeFragment: BottomSheetDialogFragment() {
                 status.text = "${it.total} - ${it.status_anime}"
                 direcao.text = it.direcao
             }
-        }, { it.stackTrace })
-        jsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
-        requestQueue!!.add<JSONObject>(jsonRequest)
+        }, Response.ErrorListener { it.stackTrace })
+        gsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
+        requestQueue!!.add(gsonRequest)
     }
 
     inner class BehaviorInternal: BottomSheetBehavior.BottomSheetCallback() {

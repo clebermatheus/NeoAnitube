@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.github.clebermatheus.neoanitube.common.MainActivity">
+      tools:context="com.github.clebermatheus.neoanitube.common.views.MainActivity">
     <item
         android:id="@+id/action_search"
         android:orderInCategory="100"
@@ -14,5 +14,11 @@
         android:orderInCategory="100"
         android:icon="@drawable/ic_view_module_24dp"
         android:title="@string/action_view"
+        app:showAsAction="ifRoom|collapseActionView"/>
+    <item
+        android:id="@+id/action_sobre"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_info_outline"
+        android:title="@string/action_sobre"
         app:showAsAction="ifRoom|collapseActionView"/>
 </menu>

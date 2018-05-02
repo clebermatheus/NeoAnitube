@@ -1,4 +1,4 @@
-package com.github.clebermatheus.neoanitube.common
+package com.github.clebermatheus.neoanitube.common.models
 
 import android.app.Activity
 import android.content.Context

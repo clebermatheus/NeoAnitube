@@ -12,7 +12,7 @@
         android:fullBackupContent="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".common.MainActivity"
+            android:name=".common.views.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
@@ -23,13 +23,13 @@
             </intent-filter>
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value=".common.SearchableActivity" />
+                android:value=".common.views.SearchableActivity" />
         </activity>
         <activity
             android:name=".anitube.views.EpisodiosActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".common.SearchableActivity"
+            android:name=".common.views.SearchableActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>

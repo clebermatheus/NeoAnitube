@@ -22,4 +22,23 @@
     <string name="anime_status">Status:</string>
     <string name="anime_direcao">Dirigido por:</string>
     <string name="action_view">Alterar visualização</string>
+    <string name="action_sobre">Sobre o Aplicativo</string>
+
+    <string name="aboutLibraries_description_special1_name">Ajude-nos!</string>
+    <string name="aboutLibraries_description_special1_text">
+        <![CDATA[
+        <h2>Ajude no projeto!</h2>
+        <p>- Divulgando o aplicativo.
+            <br>- <a href="https://github.com/clebermatheus/NeoAnitube">Sendo programador.</a>
+            <br>- Doando bitcoins: <a href="bitcoin://12wobdBU2BjAvfGopTQrQuB26pGJG7JjaX">12wobdBU2BjAvfGopTQrQuB26pGJG7JjaX</a>.</p>
+        ]]>
+    </string>
+    <string name="aboutLibraries_description_special2_name">Suporte</string>
+    <string name="aboutLibraries_description_special2_text">
+        <![CDATA[
+        <h2>Suporte</h2>
+        <p>Tem bugs ou dúvidas? <a href="https://github.com/clebermatheus/NeoAnitube/issues/new">Notifique-nos!</a>
+         ou envie por e-mail em <a href="mailto:clebermatheus@zoho.com">clebermatheus@zoho.com</a></p>
+        ]]>
+    </string>
 </resources>

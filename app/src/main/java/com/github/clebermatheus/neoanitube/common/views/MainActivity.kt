@@ -1,4 +1,4 @@
-package com.github.clebermatheus.neoanitube.common
+package com.github.clebermatheus.neoanitube.common.views
 
 import android.app.Activity
 import android.app.SearchManager
@@ -12,7 +12,6 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -21,6 +20,8 @@ import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.views.AnimesFragment
 import com.github.clebermatheus.neoanitube.anitube.views.LancamentosFragment
 import com.github.clebermatheus.neoanitube.anitube.views.UltimosFragment
+import com.mikepenz.aboutlibraries.Libs
+import com.mikepenz.aboutlibraries.LibsBuilder
 
 class MainActivity : AppCompatActivity() {
 
@@ -77,6 +78,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_search -> true
+        R.id.action_sobre -> {
+            LibsBuilder()
+                    .withActivityStyle(Libs.ActivityStyle.DARK)
+                    .withActivityTitle("Sobre").withAboutAppName(resources.getString(R.string.app_name))
+                    .withAboutIconShown(true).withAboutVersionShown(true)
+                    .withLicenseShown(true).withVersionShown(true)
+                    .start(this)
+            true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 

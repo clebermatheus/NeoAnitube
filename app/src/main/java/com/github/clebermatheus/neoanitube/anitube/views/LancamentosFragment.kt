@@ -16,16 +16,16 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.TextView
 import com.android.volley.DefaultRetryPolicy
+import com.android.volley.Request.Method.GET
 import com.android.volley.RequestQueue
-import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.constants.API
-import com.github.clebermatheus.neoanitube.anitube.model.Ultimos
+import com.github.clebermatheus.neoanitube.anitube.model.Episodios
 import com.github.clebermatheus.neoanitube.anitube.viewmodels.EpisodiosViewAdapter
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
-import com.google.gson.Gson
-import org.json.JSONObject
+import com.github.clebermatheus.neoanitube.common.models.GsonRequest
 
 /**
  * Fragmento de Lançamentos
@@ -87,17 +87,15 @@ class LancamentosFragment : Fragment() {
     private fun requestQueueLancamentos(context: Context) {
         if (requestQueue == null) requestQueue = Volley.newRequestQueue(context)
 
-        val jsonRequest = JsonObjectRequest(API.LANCAMENTOS, null, {
-            val gson = Gson()
-            val resultado: Ultimos = gson.fromJson(it.toString(), Ultimos::class.java)
-            Log.d(TAG, resultado.toString())
-            episodiosAdapter.clear()
-            episodiosAdapter.addAll(resultado.LANCAMENTOS)
+        val gsonRequest = GsonRequest<Episodios>(GET, API.LANCAMENTOS, Episodios::class.java,
+                null, Response.Listener {
+            Log.d(TAG, it.toString())
+            episodiosAdapter.clear().addAll(it.LANCAMENTOS)
             verifyAdapterIsEmpty()
             swipeRefresh.isRefreshing = false
-        }, { it.stackTrace })
-        jsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
-        requestQueue!!.add<JSONObject>(jsonRequest)
+        }, Response.ErrorListener { it.stackTrace })
+        gsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
+        requestQueue!!.add(gsonRequest)
     }
 
     private fun verifyAdapterIsEmpty() {
