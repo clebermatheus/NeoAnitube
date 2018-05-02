@@ -23,7 +23,7 @@
             </intent-filter>
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value=".common.SearchableActivity" />
+                android:value=".common.views.SearchableActivity" />
         </activity>
         <activity
             android:name=".anitube.views.EpisodiosActivity"
