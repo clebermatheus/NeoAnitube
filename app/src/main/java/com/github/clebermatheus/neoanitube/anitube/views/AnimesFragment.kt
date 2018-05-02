@@ -16,19 +16,21 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.TextView
 import com.android.volley.DefaultRetryPolicy
+import com.android.volley.Request.Method.GET
 import com.android.volley.RequestQueue
-import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.Response
+import com.android.volley.Response.ErrorListener
 import com.android.volley.toolbox.Volley
 import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Subcategoria
 import com.github.clebermatheus.neoanitube.anitube.viewmodels.AnimesViewAdapter
-import com.github.clebermatheus.neoanitube.common.views.MainActivity
-import com.github.clebermatheus.neoanitube.common.viewmodels.Preferences
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
 import com.github.clebermatheus.neoanitube.common.constants.Utils.PREF_ANIMES
-import com.google.gson.Gson
-import org.json.JSONObject
+import com.github.clebermatheus.neoanitube.common.models.GsonRequest
+import com.github.clebermatheus.neoanitube.common.models.Preferences
+import com.github.clebermatheus.neoanitube.common.views.MainActivity
+import java.lang.reflect.Type
 
 /**
  * Fragmento de Animes
@@ -93,17 +95,16 @@ class AnimesFragment : Fragment() {
     private fun requestQueueAnimes(context: Context) {
         if (requestQueue == null) requestQueue = Volley.newRequestQueue(context)
 
-        val jsonRequest = JsonObjectRequest(API.SUBCATEGORIA+"anime", null, {
-            val gson = Gson()
-            val resultado: Subcategoria = gson.fromJson(it.toString(), Subcategoria::class.java)
-            Log.d(TAG, resultado.toString())
-            preferences.putSubcategoria(PREF_ANIMES, resultado)
-            animesAdapter.clear().addAll(resultado.SUBCATEGORIAS)
+        val gsonRequest = GsonRequest<Subcategoria>(GET, API.SUBCATEGORIA+"anime",
+                Subcategoria::class.java, null, Response.Listener {
+            Log.d(TAG, it.toString())
+            preferences.putSubcategoria(PREF_ANIMES, it)
+            animesAdapter.clear().addAll(it.SUBCATEGORIAS)
             verifyAdapterIsEmpty()
             swipeRefresh.isRefreshing = false
-        }, { it.stackTrace })
-        jsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
-        requestQueue!!.add<JSONObject>(jsonRequest)
+        }, ErrorListener { it.stackTrace })
+        gsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
+        requestQueue!!.add(gsonRequest)
     }
 
     private fun verifyAdapterIsEmpty() {

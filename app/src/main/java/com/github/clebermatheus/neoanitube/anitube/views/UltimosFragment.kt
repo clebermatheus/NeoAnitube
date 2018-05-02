@@ -16,16 +16,16 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.TextView
 import com.android.volley.DefaultRetryPolicy
+import com.android.volley.Request.Method.GET
 import com.android.volley.RequestQueue
-import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.constants.API
-import com.github.clebermatheus.neoanitube.anitube.model.Ultimos
+import com.github.clebermatheus.neoanitube.anitube.model.Episodios
 import com.github.clebermatheus.neoanitube.anitube.viewmodels.EpisodiosViewAdapter
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
-import com.google.gson.Gson
-import org.json.JSONObject
+import com.github.clebermatheus.neoanitube.common.models.GsonRequest
 
 /**
  * Fragmento do Últimos lançamentos
@@ -87,17 +87,15 @@ class UltimosFragment : Fragment() {
     private fun requestQueueUltimos(context: Context) {
         if (requestQueue == null) requestQueue = Volley.newRequestQueue(context)
 
-        val jsonRequest = JsonObjectRequest(API.ULTIMOS, null, {
-            val gson = Gson()
-            val resultado: Ultimos = gson.fromJson(it.toString(), Ultimos::class.java)
-            Log.d(TAG, resultado.toString())
-            ultimosAdapter.clear()
-            ultimosAdapter.addAll(resultado.LANCAMENTOS)
-            verifyAdapterIsEmpty()
-            swipeRefresh.isRefreshing = false
-        }, { it.stackTrace })
-        jsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
-        requestQueue!!.add<JSONObject>(jsonRequest)
+        val gsonRequest = GsonRequest<Episodios>(GET, API.ULTIMOS, Episodios::class.java, null,
+            Response.Listener {
+                Log.d(TAG, it.toString())
+                ultimosAdapter.clear().addAll(it.LANCAMENTOS)
+                verifyAdapterIsEmpty()
+                swipeRefresh.isRefreshing = false
+            }, Response.ErrorListener { it.stackTrace })
+        gsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
+        requestQueue!!.add(gsonRequest)
     }
 
     private fun verifyAdapterIsEmpty() {
@@ -111,8 +109,8 @@ class UltimosFragment : Fragment() {
     }
 
     companion object {
-        private val ARG_SECTION_NUMBER = "section_number"
-        private val TAG = "UltimosFragment"
+        private const val ARG_SECTION_NUMBER = "section_number"
+        private const val TAG = "UltimosFragment"
 
         fun newInstance(sectionNumber: Int): UltimosFragment {
             val fragment = UltimosFragment()

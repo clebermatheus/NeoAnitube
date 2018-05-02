@@ -9,7 +9,10 @@ import com.google.gson.annotations.SerializedName
  *
  * Created by clebermatheus on 31/03/18.
  */
-data class Ultimos(
+data class Episodios(
+    @SerializedName("EPISODIOS")
+    @Expose
+    val EPISODIOS: ArrayList<Episodio>,
     @SerializedName("LANCAMENTOS")
     @Expose
     val LANCAMENTOS: ArrayList<Episodio>

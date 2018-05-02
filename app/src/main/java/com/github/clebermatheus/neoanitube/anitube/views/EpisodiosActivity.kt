@@ -10,19 +10,18 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.android.volley.DefaultRetryPolicy
+import com.android.volley.Request.Method.GET
 import com.android.volley.RequestQueue
-import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.Response
 import com.android.volley.toolbox.Volley
 import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Anime
-import com.github.clebermatheus.neoanitube.anitube.model.Episodio
+import com.github.clebermatheus.neoanitube.anitube.model.Episodios
 import com.github.clebermatheus.neoanitube.anitube.viewmodels.EpisodiosViewAdapter
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
+import com.github.clebermatheus.neoanitube.common.models.GsonRequest
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import org.json.JSONObject
-import java.lang.reflect.Type
 
 /**
  *
@@ -95,16 +94,14 @@ class EpisodiosActivity: AppCompatActivity() {
     private fun requestQueueEpisodios(anime: Anime) {
         if (requestQueue == null) requestQueue = Volley.newRequestQueue(this)
 
-        val jsonRequest = JsonObjectRequest(API.EPISODIOS+anime.chid, null, {
-            val gson = Gson()
-            val type: Type = object : TypeToken<ArrayList<Episodio>>() {}.type
-            val resultado: ArrayList<Episodio> = gson.fromJson(it.getString("EPISODIOS"), type)
-            Log.d(TAG, resultado.toString())
-            episodiosViewAdapter.clear().addAll(resultado)
-            swipeRefresh.isRefreshing = false
-        }, { it.stackTrace })
-        jsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
-        requestQueue!!.add<JSONObject>(jsonRequest)
+        val gsonRequest = GsonRequest<Episodios>(GET, API.EPISODIOS+anime.chid, Episodios::class.java,
+                null, Response.Listener {
+                    Log.d(TAG, it.toString())
+                    episodiosViewAdapter.clear().addAll(it.EPISODIOS)
+                    swipeRefresh.isRefreshing = false
+                }, Response.ErrorListener { it.stackTrace })
+        gsonRequest.retryPolicy = DefaultRetryPolicy(30000, MAX_REQUESTS, 1.0f)
+        requestQueue!!.add(gsonRequest)
     }
 
     companion object {
