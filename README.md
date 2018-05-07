@@ -5,7 +5,7 @@ Assista animes sem anúncios
 
 ## Instalação
 
-NeoAnitube pode ser baixado [Google Play](https://play.google.com/store/apps/details?id=)
+NeoAnitube pode ser baixado na [Google Play](https://play.google.com/store/apps/details?id=)
 
 ## Como começar
 
