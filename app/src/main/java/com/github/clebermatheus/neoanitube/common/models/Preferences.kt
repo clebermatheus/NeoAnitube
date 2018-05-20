@@ -13,7 +13,7 @@ import com.google.gson.Gson
  * Created by clebermatheus on 16/04/18.
  */
 class Preferences(context: Context) {
-    private var preferences: SharedPreferences
+    var preferences: SharedPreferences
     private var editor: SharedPreferences.Editor
     private val gson = Gson()
 
@@ -21,6 +21,13 @@ class Preferences(context: Context) {
         preferences = context.getSharedPreferences(PREFERENCES, Activity.MODE_PRIVATE)
         editor = preferences.edit()
         editor.apply()
+    }
+
+    inline fun <reified T>get(key: String): T {
+        return Gson().fromJson(preferences.getString(key, ""), T::class.java)
+    }
+    inline fun <reified T>put(key: String, value: T) {
+        preferences.edit().putString(key, Gson().toJson(value)).apply()
     }
 
     // Armazena strings
@@ -32,10 +39,9 @@ class Preferences(context: Context) {
         return gson.fromJson(preferences.getString(key, "{\"SUBCATEGORIAS\": []}"),
     Subcategoria::class.java)
     }
-    fun putSubcategoria(key: String, value: Subcategoria) = editor.putString(key, gson.toJson
-    (value)).apply()
+    fun putSubcategoria(key: String, value: Subcategoria) = editor.putString(key, gson.toJson(value)).apply()
 
     companion object {
-        val PREFERENCES = Preferences::class.java.simpleName
+        val PREFERENCES: String = Preferences::class.java.simpleName
     }
 }

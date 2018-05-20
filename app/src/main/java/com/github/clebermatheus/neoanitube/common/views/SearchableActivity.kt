@@ -18,7 +18,7 @@ import com.android.volley.toolbox.Volley
 import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Subcategoria
-import com.github.clebermatheus.neoanitube.anitube.viewmodels.AnimesViewAdapter
+import com.github.clebermatheus.neoanitube.anitube.views.adapter.AnimesViewAdapter
 import com.github.clebermatheus.neoanitube.common.constants.Utils
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
 import com.github.clebermatheus.neoanitube.common.constants.Utils.PREF_ANIMES
@@ -41,7 +41,7 @@ class SearchableActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search)
         preferences = Preferences(this)
-        animesAdapter = AnimesViewAdapter(preferences.getSubcategoria(Utils.PREF_ANIMES).SUBCATEGORIAS, this)
+        animesAdapter = AnimesViewAdapter(preferences.getSubcategoria(PREF_ANIMES).SUBCATEGORIAS, this)
         recyclerView = findViewById<RecyclerView>(R.id.rvAnimes).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)

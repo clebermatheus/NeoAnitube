@@ -18,7 +18,7 @@ import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Anime
 import com.github.clebermatheus.neoanitube.anitube.model.Episodios
-import com.github.clebermatheus.neoanitube.anitube.viewmodels.EpisodiosViewAdapter
+import com.github.clebermatheus.neoanitube.anitube.views.adapter.EpisodiosViewAdapter
 import com.github.clebermatheus.neoanitube.common.constants.Utils.MAX_REQUESTS
 import com.github.clebermatheus.neoanitube.common.models.GsonRequest
 import com.google.gson.Gson

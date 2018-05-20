@@ -4,6 +4,7 @@ import com.android.volley.NetworkResponse
 import com.android.volley.ParseError
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.Response.*
 import com.android.volley.toolbox.HttpHeaderParser
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
@@ -16,8 +17,8 @@ class GsonRequest<T>(
         url: String,
         private val type: Type,
         private val headers: MutableMap<String, String>?,
-        private val listener: Response.Listener<T>,
-        errorListener: Response.ErrorListener
+        private val listener: Listener<T>,
+        errorListener: ErrorListener
 ): Request<T>(method, url, errorListener) {
     private val gson = Gson()
 
@@ -31,7 +32,7 @@ class GsonRequest<T>(
                     response?.data ?: ByteArray(0),
                     Charset.forName(HttpHeaderParser.parseCharset(response?.headers))
             )
-            Response.success(
+            success(
                     gson.fromJson(json, type),
                     HttpHeaderParser.parseCacheHeaders(response)
             )

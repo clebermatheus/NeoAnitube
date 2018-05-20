@@ -14,7 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView
 import com.github.clebermatheus.neoanitube.R
 import com.github.clebermatheus.neoanitube.anitube.constants.API
 import com.github.clebermatheus.neoanitube.anitube.model.Episodio
-import com.github.clebermatheus.neoanitube.anitube.viewmodels.EpisodioAdapter
+import com.github.clebermatheus.neoanitube.anitube.views.adapter.EpisodioAdapter
 import com.google.gson.Gson
 
 /**
